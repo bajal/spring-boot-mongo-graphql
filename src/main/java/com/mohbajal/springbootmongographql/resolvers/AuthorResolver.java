@@ -14,7 +14,7 @@ public class AuthorResolver implements GraphQLResolver<Author> {
         this.postDao = postDao;
     }
 
-    public List<Post> getPosts(Author author) {
+    /*public List<Post> getPosts(Author author) {
         return postDao.getAuthorPosts(author.getId());
-    }
+    }*/
 }

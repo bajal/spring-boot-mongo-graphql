@@ -8,13 +8,13 @@ import com.mohbajal.springbootmongographql.daos.AuthorDao;
 import com.mohbajal.springbootmongographql.daos.Post;
 
 public class PostResolver implements GraphQLResolver<Post> {
-    private AuthorDao authorDao;
 
-    public PostResolver(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+
+    public PostResolver() {
+
     }
 
-    public Optional<Author> getAuthor(Post post) {
+    /*public Optional<Author> getAuthor(Post post) {
         return authorDao.getAuthor(post.getAuthorId());
-    }
+    }*/
 }

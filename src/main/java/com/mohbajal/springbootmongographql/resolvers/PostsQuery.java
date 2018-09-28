@@ -6,11 +6,11 @@ import com.mohbajal.springbootmongographql.daos.PostDao;
 
 import java.util.List;
 
-public class Query implements GraphQLQueryResolver {
+public class PostsQuery implements GraphQLQueryResolver {
 
     private PostDao postDao;
 
-    public Query(PostDao postDao) {
+    public PostsQuery(PostDao postDao) {
         this.postDao = postDao;
     }
 

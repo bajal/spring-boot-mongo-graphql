@@ -17,10 +17,10 @@ public class Mutation implements GraphQLMutationResolver {
         Post post = new Post();
         post.setId(UUID.randomUUID().toString());
         post.setTitle(title);
-        post.setText(text);
-        post.setCategory(category);
-        post.setAuthorId(author);
-        postDao.savePost(post);
+        //post.setText(text);
+        //post.setCategory(category);
+        //post.setAuthorId(author);
+        //postDao.savePost(post);
 
         return post;
     }

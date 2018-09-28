@@ -10,26 +10,28 @@ import com.mohbajal.springbootmongographql.daos.PostDao;
 import com.mohbajal.springbootmongographql.resolvers.AuthorResolver;
 import com.mohbajal.springbootmongographql.resolvers.Mutation;
 import com.mohbajal.springbootmongographql.resolvers.PostResolver;
-import com.mohbajal.springbootmongographql.resolvers.Query;
+
+import com.mohbajal.springbootmongographql.resolvers.PostsQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
 
 @Configuration
 public class GraphqlConfiguration {
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+
     @Bean
     public PostDao postDao() {
-        List<Post> posts = new ArrayList<>();
-        for (int postId = 0; postId < 10; ++postId) {
-            for (int authorId = 0; authorId < 10; ++authorId) {
-                Post post = new Post();
-                post.setId("Post" + authorId + postId);
-                post.setTitle("Post " + authorId + ":" + postId);
-                post.setText("Post " + postId + " + by author " + authorId);
-                post.setAuthorId("Author" + authorId);
-                posts.add(post);
-            }
-        }
+        Query query = new Query();
+        query.limit(10);
+        List<Post> posts = mongoTemplate.find(query, Post.class);
+
         return new PostDao(posts);
     }
 
@@ -47,8 +49,8 @@ public class GraphqlConfiguration {
     }
 
     @Bean
-    public PostResolver postResolver(AuthorDao authorDao) {
-        return new PostResolver(authorDao);
+    public PostResolver postResolver() {
+        return new PostResolver();
     }
 
     @Bean
@@ -57,8 +59,8 @@ public class GraphqlConfiguration {
     }
 
     @Bean
-    public Query query(PostDao postDao) {
-        return new Query(postDao);
+    public PostsQuery query(PostDao postDao) {
+        return new PostsQuery(postDao);
     }
 
     @Bean
