@@ -3,11 +3,8 @@ package com.mohbajal.springbootmongographql.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mohbajal.springbootmongographql.daos.Author;
-import com.mohbajal.springbootmongographql.daos.AuthorDao;
 import com.mohbajal.springbootmongographql.daos.Post;
 import com.mohbajal.springbootmongographql.daos.PostDao;
-import com.mohbajal.springbootmongographql.resolvers.AuthorResolver;
 import com.mohbajal.springbootmongographql.resolvers.Mutation;
 import com.mohbajal.springbootmongographql.resolvers.PostResolver;
 
@@ -35,18 +32,6 @@ public class GraphqlConfiguration {
         return new PostDao(posts);
     }
 
-    @Bean
-    public AuthorDao authorDao() {
-        List<Author> authors = new ArrayList<>();
-        for (int authorId = 0; authorId < 10; ++authorId) {
-            Author author = new Author();
-            author.setId("Author" + authorId);
-            author.setName("Author " + authorId);
-            author.setThumbnail("http://example.com/authors/" + authorId);
-            authors.add(author);
-        }
-        return new AuthorDao(authors);
-    }
 
     @Bean
     public PostResolver postResolver() {
@@ -54,13 +39,8 @@ public class GraphqlConfiguration {
     }
 
     @Bean
-    public AuthorResolver authorResolver(PostDao postDao) {
-        return new AuthorResolver(postDao);
-    }
-
-    @Bean
-    public PostsQuery query(PostDao postDao) {
-        return new PostsQuery(postDao);
+    public PostsQuery query() {
+        return new PostsQuery();
     }
 
     @Bean

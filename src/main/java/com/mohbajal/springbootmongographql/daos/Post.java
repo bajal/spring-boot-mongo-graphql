@@ -6,6 +6,7 @@ import java.util.List;
 
 @Document(collection = "posts")
 public class Post {
+
     private String id;
     private String body;
     private String permalink;
