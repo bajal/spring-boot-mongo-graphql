@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-boot-mongo-graphql
+  servlet:
+    multipart:
+      enabled: true
+      location: /tmp
+server:
+  port: 9000
+graphql:
+  servlet:
+      mapping: /graphql
+      enabled: true
+      corsEnabled: true
+  tools:
+      schemaLocationPattern: "**/*.graphqls"
