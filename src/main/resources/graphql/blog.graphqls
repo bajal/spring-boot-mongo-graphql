@@ -4,7 +4,6 @@ type Post {
     permalink: String!
     author: String
     tags: [String]
-    
 }
 
 # The Root Query for the application
